@@ -58,6 +58,7 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Community:** https://discord.gg/JYWbz5PsPp
 - **Explorer:** https://explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
+- **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
 - **YouTube explainer:** https://youtu.be/zreQOn88MAg
 - **Instagram:** https://www.instagram.com/connectcoincrypto/
 - **TikTok:** https://www.tiktok.com/@connectcoin

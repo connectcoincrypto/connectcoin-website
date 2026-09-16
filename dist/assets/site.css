@@ -89,6 +89,10 @@ h1 span { color: var(--accent); }
 .community-card .card-link { color: var(--accent); }
 .community-card p { color: #aac4c2; }
 .community-card .card-meta { color: #99bdb7; }
+.project-listing { margin-top: 16px; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; }
+.project-listing h3 { margin: 0 0 6px; font-size: 1.125rem; }
+.project-listing p { margin: 0; max-width: none; font-size: .9375rem; }
+.project-listing .card-link { margin-top: 0; align-items: center; flex-wrap: nowrap; }
 .socials { margin-top: 48px; }
 .social-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 16px; }
 .video-card { display: flex; flex-direction: column; padding: 28px; min-width: 0; border: 1px solid #315951; border-radius: 12px; background: radial-gradient(ellipse at 100% 0, #1b65543d, transparent 70%), #0f2029; transition: border-color .2s, transform .2s; }
@@ -167,6 +171,7 @@ h1 span { color: var(--accent); }
   .resource-card { padding: 23px; }
   .resource-card p { max-width: 100%; }
   .card-top { margin-bottom: 20px; }
+  .project-listing { margin-top: 12px; }
   .socials { margin-top: 36px; }
   .social-layout, .social-grid { gap: 12px; }
   .video-card { padding: 23px; }

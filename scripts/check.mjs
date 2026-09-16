@@ -55,6 +55,13 @@ for (const expected of [
   '/whitepaper.pdf',
 ]) assert.ok(html.includes(`href="${expected}"`), `Missing destination: ${expected}`);
 
+const projectListings = [...html.matchAll(/<a\b([^>]*href="https:\/\/chainquiry\.com\/projects\/connectcoin\/"[^>]*)>([\s\S]*?)<\/a>/g)];
+assert.equal(projectListings.length, 1, 'Include the exact Chainquiry project link once');
+assert.match(projectListings[0][1], /target="_blank"/);
+assert.match(projectListings[0][1], /rel="noopener noreferrer"/);
+assert.match(projectListings[0][2], /<h3>ConnectCoin on Chainquiry<\/h3>/);
+assert.match(projectListings[0][2], /new tab/, 'Announce that Chainquiry opens in a new tab');
+
 const socialSection = html.match(/<section class="socials" aria-labelledby="socials-title">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(socialSection, 'Social links need a labelled section');
 assert.match(socialSection, /<h2 id="socials-title">/);
