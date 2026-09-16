@@ -55,6 +55,28 @@ for (const expected of [
   '/whitepaper.pdf',
 ]) assert.ok(html.includes(`href="${expected}"`), `Missing destination: ${expected}`);
 
+const socialSection = html.match(/<section class="socials" aria-labelledby="socials-title">([\s\S]*?)<\/section>/)?.[1];
+assert.ok(socialSection, 'Social links need a labelled section');
+assert.match(socialSection, /<h2 id="socials-title">/);
+const socialLinks = [...socialSection.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
+const expectedSocialLinks = new Map([
+  ['https://youtu.be/zreQOn88MAg', 'YouTube'],
+  ['https://www.instagram.com/connectcoincrypto/', 'Instagram'],
+  ['https://www.tiktok.com/@connectcoin', 'TikTok'],
+  ['https://x.com/connectcoincc', 'X'],
+  ['https://t.me/connectcoincrypto', 'Telegram'],
+]);
+assert.equal(socialLinks.length, expectedSocialLinks.size, 'Keep all five requested social destinations');
+for (const [destination, label] of expectedSocialLinks) {
+  const matches = socialLinks.filter(link => link[1].includes(`href="${destination}"`));
+  assert.equal(matches.length, 1, `Social destination must appear exactly once in the section: ${destination}`);
+  assert.match(matches[0][1], /target="_blank"/);
+  assert.match(matches[0][1], /rel="noopener noreferrer"/);
+  assert.ok(matches[0][2].replace(/<[^>]+>/g, ' ').split(/\s+/).includes(label), `Missing visible platform label: ${label}`);
+  assert.match(matches[0][2], /new tab/, `Missing new-tab announcement: ${label}`);
+}
+assert.doesNotMatch(html, /<iframe\b/i, 'Use direct social links without loading third-party embeds');
+
 const pdf = await readFile(resolve(publicRoot, 'whitepaper.pdf'));
 assert.equal(pdf.subarray(0, 5).toString(), '%PDF-', 'Whitepaper must be a PDF, not an HTML error');
 assert.ok(pdf.subarray(-1024).toString().includes('%%EOF'), 'Whitepaper must be complete');

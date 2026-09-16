@@ -2,6 +2,7 @@
 
 A small, static homepage for **connectcoincrypto.com**. It points visitors to
 ConnectCoin Core, the whitepaper, the blockchain explorer, and the community.
+It also features the video explainer and links to ConnectCoin's social accounts.
 
 Production is served as static files by Nginx on VPS 3. GitHub Actions validates
 changes but does not deploy them; publication is a separate, manual step.
@@ -57,6 +58,15 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Community:** https://discord.gg/JYWbz5PsPp
 - **Explorer:** https://explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
+- **YouTube explainer:** https://youtu.be/zreQOn88MAg
+- **Instagram:** https://www.instagram.com/connectcoincrypto/
+- **TikTok:** https://www.tiktok.com/@connectcoin
+- **X:** https://x.com/connectcoincc
+- **Telegram:** https://t.me/connectcoincrypto
+
+The YouTube card opens the explainer video directly, not a channel page. Social
+links are plain links: no third-party player, tracking widget, or embed loads
+when someone visits the homepage. Discord remains the main community link.
 
 The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.
