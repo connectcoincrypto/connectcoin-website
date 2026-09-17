@@ -3,6 +3,8 @@
 A small, static homepage for **connectcoincrypto.com**. It points visitors to
 ConnectCoin Core, the whitepaper, the blockchain explorer, and the community.
 It also features the video explainer and links to ConnectCoin's social accounts.
+The **ConnectCoin in Media** section collects published articles, external
+project profiles, and posts about the project.
 
 Production is served as static files by Nginx on VPS 3. GitHub Actions validates
 changes but does not deploy them; publication is a separate, manual step.
@@ -59,6 +61,8 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Explorer:** https://explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
+- **Chainquiry article:** https://chainquiry.com/what-is-connectcoin-pay-to-connect-randomx/
+- **Reddit post:** https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/
 - **YouTube explainer:** https://youtu.be/zreQOn88MAg
 - **Instagram:** https://www.instagram.com/connectcoincrypto/
 - **TikTok:** https://www.tiktok.com/@connectcoin
@@ -68,6 +72,12 @@ no registered Site, deployment ID, or automatic publication configured.
 The YouTube card opens the explainer video directly, not a channel page. Social
 links are plain links: no third-party player, tracking widget, or embed loads
 when someone visits the homepage. Discord remains the main community link.
+
+The Media navigation link points to `/#media`. Add only published, verified
+destinations to that section, with a short description and the publisher's name.
+Keep sponsored posts and paid listings labelled; an external link is not a claim
+of independent endorsement. The Chainquiry profile appears here once, alongside
+the article and Reddit post. No Medium article is linked until one is published.
 
 The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.
