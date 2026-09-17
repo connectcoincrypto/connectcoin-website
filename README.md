@@ -62,6 +62,7 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Whitepaper:** `/whitepaper.pdf`
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
 - **Chainquiry article:** https://chainquiry.com/what-is-connectcoin-pay-to-connect-randomx/
+- **Medium article by Chainquiry:** https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068
 - **Reddit post:** https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/
 - **YouTube explainer:** https://youtu.be/zreQOn88MAg
 - **Instagram:** https://www.instagram.com/connectcoincrypto/
@@ -77,7 +78,7 @@ The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
 Keep sponsored posts and paid listings labelled; an external link is not a claim
 of independent endorsement. The Chainquiry profile appears here once, alongside
-the article and Reddit post. No Medium article is linked until one is published.
+the Chainquiry and Medium articles and the Reddit post.
 
 The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.

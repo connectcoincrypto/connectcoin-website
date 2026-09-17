@@ -69,6 +69,7 @@ assert.match(html, /<nav\b[^>]*>[\s\S]*?<a href="#media">Media<\/a>[\s\S]*?<\/na
 const mediaLinks = [...mediaSection.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
 const expectedMediaLinks = new Map([
   ['https://chainquiry.com/what-is-connectcoin-pay-to-connect-randomx/', { publisher: 'Chainquiry', sponsored: false }],
+  ['https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068', { publisher: 'Medium', sponsored: false }],
   ['https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/', { publisher: 'Reddit', sponsored: true }],
   ['https://chainquiry.com/projects/connectcoin/', { publisher: 'Chainquiry', sponsored: true }],
 ]);
