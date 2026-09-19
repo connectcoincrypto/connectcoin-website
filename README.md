@@ -5,6 +5,7 @@ ConnectCoin Core, the whitepaper, the blockchain explorer, and the community.
 It also features the video explainer and links to ConnectCoin's social accounts.
 The **ConnectCoin in Media** section collects published articles, external
 project profiles, and posts about the project.
+The countdown section loads the ConnectCoin widget hosted by Chainquiry.
 
 Production is served as static files by Nginx on VPS 3. GitHub Actions validates
 changes but does not deploy them; publication is a separate, manual step.
@@ -40,8 +41,11 @@ npm run dev
 | --- | --- |
 | `dist/index.html` | Homepage copy, navigation, metadata, and inline icons |
 | `dist/assets/site.css` | Responsive layout and visual theme |
-| `dist/assets/connectcoin.png` | Original 256px ConnectCoin logo, used in the header |
-| `dist/assets/connectcoin-hero.png` | Original 1024px ConnectCoin logo, used in the hero |
+| `dist/assets/connectcoin.png` | Original 256px ConnectCoin logo, retained but no longer displayed |
+| `dist/assets/connectcoin-hero.png` | Original 1024px ConnectCoin logo, displayed in the hero card |
+| `dist/assets/connectcoin-banner.webp` | Former 2172 × 724 ConnectCoin banner, retained but no longer displayed |
+| `dist/assets/favicon-32.png` | Supplied logo resized to a 32 × 32 PNG favicon |
+| `dist/assets/favicon-192.png` | Supplied logo resized to 192 × 192, used for the favicon and header logo |
 | `dist/whitepaper.pdf` | The actual whitepaper, served at `/whitepaper.pdf` |
 | `dist/robots.txt`, `dist/sitemap.xml` | Crawler discovery metadata for the final domain |
 | `scripts/serve.mjs` | Dependency-free local preview server |
@@ -61,6 +65,7 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Explorer:** https://explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
+- **Chainquiry countdown:** https://chainquiry.com/?cq_countdown_embed=28104
 - **Chainquiry article:** https://chainquiry.com/what-is-connectcoin-pay-to-connect-randomx/
 - **Medium article by Chainquiry:** https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068
 - **Reddit post:** https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/
@@ -71,8 +76,16 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Telegram:** https://t.me/connectcoincrypto
 
 The YouTube card opens the explainer video directly, not a channel page. Social
-links are plain links: no third-party player, tracking widget, or embed loads
-when someone visits the homepage. Discord remains the main community link.
+links are plain links and do not load social players or embeds. Discord remains
+the main community link.
+
+The `#countdown` section between the hero and resources contains only one
+lazy-loaded Chainquiry iframe, sized to 100% width (up to 760px) and 250px height.
+The section has an accessible label, with no visible heading or fallback link.
+The widget requests content from Chainquiry and may execute JavaScript and use
+cookies under that third party's control. Chainquiry controls the displayed
+countdown; the homepage does not define a countdown date or claim that it marks
+a mainnet launch.
 
 The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
@@ -84,9 +97,11 @@ The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.
 The status and notice describe the experimental testnet, not a mainnet launch.
 
-There is no client-side JavaScript, analytics, cookies, remote font request,
-wallet connection, or live network-status polling. Links work without scripts.
-External resources open in a new tab with accessible descriptions and safe
+The authored homepage remains static and dependency-free, with no scripts,
+first-party analytics or cookies, remote font request, wallet connection, or
+live network-status polling. Its links work without scripts. The external
+countdown iframe has its own behavior as described above.
+External links open in a new tab with accessible descriptions and safe
 `rel` attributes; the PDF opens in the current tab.
 
 ## Update the whitepaper
@@ -96,8 +111,13 @@ The included copy is the September 2026 paper by Papaulo, matching the version
 available at `https://connectcoincrypto.com/whitepaper.pdf` when this site was
 prepared on September 14, 2026. The website does not fetch or regenerate it.
 
-The two PNGs are existing ConnectCoin repository assets. They are kept unchanged;
-the stylesheet crops their baked checkerboard border for presentation.
+The original logo PNGs are existing ConnectCoin repository assets and remain
+unchanged. The 256px logo is retained but no longer displayed. The hero card
+uses the original 1024px square logo with its baked checkerboard border cropped
+by the stylesheet. The header keeps its original small-logo-and-name layout,
+using the supplied 192px logo beside the ConnectCoin text before the navigation.
+The header brand links to the homepage. The same 192px image also serves as a
+favicon. The former WebP banner remains tracked but is no longer displayed.
 
 ## Validate
 
@@ -105,8 +125,11 @@ the stylesheet crops their baked checkerboard border for presentation.
 npm run check
 ```
 
-The same offline check runs in GitHub Actions. It checks local references and
-expected destination URLs, not the uptime of external services. Also review the
+The same offline check runs in GitHub Actions. It checks local references,
+favicon PNG signatures and dimensions, the header brand's layout and image
+attributes, expected destination URLs, and the sole permitted iframe's
+attributes and labelled container. It does not verify external service uptime
+or the widget's displayed countdown. Also review the
 page in desktop and mobile browsers and confirm `/whitepaper.pdf` opens.
 
 ## Production hosting
