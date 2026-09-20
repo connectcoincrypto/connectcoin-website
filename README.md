@@ -46,7 +46,8 @@ npm run dev
 | `dist/assets/connectcoin-banner.webp` | Former 2172 × 724 ConnectCoin banner, retained but no longer displayed |
 | `dist/assets/favicon-32.png` | Supplied logo resized to a 32 × 32 PNG favicon |
 | `dist/assets/favicon-192.png` | Supplied logo resized to 192 × 192, used for the favicon and header logo |
-| `dist/whitepaper.pdf` | The actual whitepaper, served at `/whitepaper.pdf` |
+| [dist/whitepaper.pdf](dist/whitepaper.pdf) | Compiled whitepaper, served at `/whitepaper.pdf` |
+| [whitepaper/connectcoin-whitepaper.tex](whitepaper/connectcoin-whitepaper.tex) | Standalone LaTeX source for the whitepaper |
 | `dist/robots.txt`, `dist/sitemap.xml` | Crawler discovery metadata for the final domain |
 | `scripts/serve.mjs` | Dependency-free local preview server |
 | `scripts/check.mjs` | Static resource, link, and PDF integrity checks |
@@ -106,10 +107,32 @@ External links open in a new tab with accessible descriptions and safe
 
 ## Update the whitepaper
 
-Replace `dist/whitepaper.pdf` with the approved PDF while keeping that filename.
-The included copy is the September 2026 paper by Papaulo, matching the version
-available at `https://connectcoincrypto.com/whitepaper.pdf` when this site was
-prepared on September 14, 2026. The website does not fetch or regenerate it.
+The September 2026 paper by Papaulo is available as a
+[compiled PDF](dist/whitepaper.pdf) and
+[standalone LaTeX source](whitepaper/connectcoin-whitepaper.tex). This revision
+updates the monetary ticker to `CONN`, preserving Papaulo's authorship and the
+existing technical content. The source requires no external images or
+bibliography file.
+
+Edit the LaTeX source, then compile it with Tectonic from the repository root.
+On Linux or macOS, use a temporary output directory so build files stay outside
+the published site:
+
+```sh
+paper_build_dir="$(mktemp -d)"
+tectonic --keep-logs --outdir "$paper_build_dir" whitepaper/connectcoin-whitepaper.tex &&
+  cp "$paper_build_dir/connectcoin-whitepaper.pdf" dist/whitepaper.pdf
+```
+
+On Windows, create a temporary directory and pass its path to `--outdir`, then
+use `Copy-Item` to copy the successfully compiled `connectcoin-whitepaper.pdf`
+to `dist/whitepaper.pdf`. Tectonic is a separate LaTeX tool; no npm dependencies
+are needed for compilation.
+
+Review the compilation log and the resulting PDF, then run `npm run check`.
+Keep the public filename `dist/whitepaper.pdf` so `/whitepaper.pdf` continues
+to work. The website serves the checked-in PDF and does not fetch or regenerate
+it automatically. Publication remains the manual process described below.
 
 The original logo PNGs are existing ConnectCoin repository assets and remain
 unchanged. The 256px logo is retained but no longer displayed. The hero card
