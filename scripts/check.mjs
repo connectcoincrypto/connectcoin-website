@@ -135,8 +135,10 @@ assert.ok(mediaSection, 'Media links need a labelled section with a stable ancho
 assert.match(mediaSection, /<h2 id="media-title">ConnectCoin in Media\.<\/h2>/);
 assert.match(html, /<nav\b[^>]*>[\s\S]*?<a href="#media">Media<\/a>[\s\S]*?<\/nav>/, 'Make the media section reachable from the main navigation');
 const mediaLinks = [...mediaSection.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
+const bifinanceAnnouncement = 'https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon';
 const expectedMediaLinks = new Map([
-  ['https://chainquiry.com/what-is-connectcoin-pay-to-connect-randomx/', { publisher: 'Chainquiry', sponsored: false }],
+  [bifinanceAnnouncement, { publisher: 'BiFinance', sponsored: true }],
+  ['https://chainquiry.com/insights/what-is-connectcoin/', { publisher: 'Chainquiry', sponsored: false }],
   ['https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068', { publisher: 'Medium', sponsored: false }],
   ['https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/', { publisher: 'Reddit', sponsored: true }],
   ['https://chainquiry.com/projects/connectcoin/', { publisher: 'Chainquiry', sponsored: true }],
@@ -150,7 +152,11 @@ for (const [destination, { publisher, sponsored }] of expectedMediaLinks) {
   assert.ok(matches[0][2].includes(publisher), `Identify the publisher: ${destination}`);
   assert.match(matches[0][2], /<h3>[^<]+<\/h3>/, 'Media links need meaningful headings');
   assert.match(matches[0][2], /new tab/, 'Announce new tabs for media links');
-  if (sponsored) assert.match(matches[0][2], /<span class="media-badge">Sponsored(?: listing)?<\/span>/, 'Keep known paid placements visibly labelled');
+  if (sponsored) assert.match(matches[0][2], /<span class="media-badge">(?:Sponsored(?: listing)?|Paid listing)<\/span>/, 'Keep known paid placements visibly labelled');
+  if (destination === bifinanceAnnouncement) {
+    assert.match(matches[0][2], /<h3>BiFinance Will List CONN Soon<\/h3>/, 'Use the published announcement title');
+    assert.match(matches[0][2], /<p>BiFinance announces an upcoming listing of ConnectCoin \(CONN\)\.<\/p>/, 'An upcoming listing announcement must not imply trading is already live');
+  }
 }
 
 const socialSection = html.match(/<section class="socials" aria-labelledby="socials-title">([\s\S]*?)<\/section>/)?.[1];

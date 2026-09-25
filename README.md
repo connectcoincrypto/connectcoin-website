@@ -3,8 +3,8 @@
 A small, static homepage for **connectcoincrypto.com**. It points visitors to
 ConnectCoin Core, the whitepaper, the blockchain explorer, and the community.
 It also features the video explainer and links to ConnectCoin's social accounts.
-The **ConnectCoin in Media** section collects published articles, external
-project profiles, and posts about the project.
+The **ConnectCoin in Media** section collects published articles, announcements,
+external project profiles, and posts about the project.
 The countdown section loads the ConnectCoin widget hosted by Chainquiry.
 
 Production is served as static files by Nginx on VPS 3. GitHub Actions validates
@@ -65,9 +65,10 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Community:** https://discord.gg/JYWbz5PsPp
 - **Explorer:** https://explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
+- **BiFinance listing announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
 - **Chainquiry countdown:** https://chainquiry.com/?cq_countdown_embed=28104
-- **Chainquiry article:** https://chainquiry.com/what-is-connectcoin-pay-to-connect-randomx/
+- **Chainquiry article:** https://chainquiry.com/insights/what-is-connectcoin/
 - **Medium article by Chainquiry:** https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068
 - **Reddit post:** https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/
 - **YouTube explainer:** https://youtu.be/zreQOn88MAg
@@ -92,7 +93,9 @@ The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
 Keep sponsored posts and paid listings labelled; an external link is not a claim
 of independent endorsement. The Chainquiry profile appears here once, alongside
-the Chainquiry and Medium articles and the Reddit post.
+the Chainquiry and Medium articles, the Reddit post, and the BiFinance listing
+announcement. The BiFinance card describes an upcoming listing, not live trading,
+and is labelled as a paid listing rather than independent editorial coverage.
 
 The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.
