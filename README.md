@@ -113,8 +113,9 @@ External links open in a new tab with accessible descriptions and safe
 The September 2026 paper by Papaulo is available as a
 [compiled PDF](dist/whitepaper.pdf) and
 [standalone LaTeX source](whitepaper/connectcoin-whitepaper.tex). This revision
-updates the monetary ticker to `CONN`, preserving Papaulo's authorship and the
-existing technical content. The source requires no external images or
+uses the monetary ticker `CONN` and documents the P2C consensus limit of
+64 bits on every certificate's RSA public exponent, independent of modulus
+size. Papaulo's authorship is preserved. The source requires no external images or
 bibliography file.
 
 Edit the LaTeX source, then compile it with Tectonic from the repository root.

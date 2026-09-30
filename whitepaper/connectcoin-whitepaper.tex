@@ -197,6 +197,13 @@ The selected signature scheme must be offered in the ClientHello and permitted
 by the output's mask. RSA keys must contain at least 2,048 bits; RSA-PSS uses
 MGF1-SHA-256 and a 32-byte salt. RSA encryption keys and restricted RSA-PSS
 keys are distinguished and checked against the selected scheme.
+Every RSA certificate public exponent $e$ must satisfy
+$\operatorname{bit\_length}(e)\leq 64$, or $e\leq 2^{64}-1$ for a valid
+positive exponent, independently of the modulus size. This applies to both
+RSA key types, every supplied certificate (including unused entries), and
+the selected trusted-root bundle. Validators enforce this bound before
+certificate-path and CertificateVerify signature checks. It limits the
+public exponent, not the RSA key size.
 Resumption, early data, and HelloRetryRequest are excluded. This
 reduces the set of states that consensus must interpret, at the cost of
 compatibility with some servers. The exact versioned profile, rather than
@@ -576,12 +583,12 @@ S. Nakamoto. \emph{Bitcoin: A Peer-to-Peer Electronic Cash System}. 2008.
 
 \bibitem{connectcoin}
 ConnectCoin contributors. \emph{ConnectCoin Core}, revision
-\texttt{783840b236}, September 2026.
+\texttt{a32fb95618}, September 2026.
 Protocol and monetary rules: \texttt{src/consensus/p2c.cpp},
 \texttt{src/consensus/p2c\_x509.cpp}, \texttt{src/kernel/chainparams.cpp},
 \texttt{src/validation.cpp}, \texttt{src/wallet/p2c\_worker\_impl.cpp},
 \texttt{doc/typed-outputs.md}, and \texttt{doc/p2c-wallet.md}.
-\href{https://github.com/connectcoincrypto/connectcoin/tree/783840b2360d6b6f9e8375d5b43dbe10cecf4194}{Source tree and protocol documentation}.
+\href{https://github.com/connectcoincrypto/connectcoin/tree/a32fb95618f058a79125f1c5b98d95ad972445da}{Source tree and protocol documentation}.
 
 \bibitem{randomx}
 tevador and RandomX contributors. \emph{RandomX: Proof of Work Algorithm
