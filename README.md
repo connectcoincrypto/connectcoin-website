@@ -7,8 +7,10 @@ The **ConnectCoin in Media** section collects published articles, announcements,
 external project profiles, and posts about the project.
 The countdown section loads the ConnectCoin widget hosted by Chainquiry.
 
-Production is served as static files by Nginx on VPS 3. GitHub Actions validates
-changes but does not deploy them; publication is a separate, manual step.
+Production is served as static files by Nginx on `connectcoin2.com`
+(`82.25.65.36`). The mainnet explorer runs separately on `connectcoin3.com`;
+the testnet explorer is a separate service too. GitHub Actions validates changes
+but does not deploy them; publication is a separate, manual step.
 
 ## Preview locally
 
@@ -63,7 +65,8 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Source:** https://github.com/connectcoincrypto/connectcoin
 - **P2C specification:** https://github.com/connectcoincrypto/connectcoin/blob/main/doc/pay-to-connect.md
 - **Community:** https://discord.gg/JYWbz5PsPp
-- **Explorer:** https://explorer.connectcoincrypto.com/
+- **Mainnet explorer:** https://explorer.connectcoincrypto.com/
+- **Testnet explorer:** https://testnet.explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
 - **BiFinance listing announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
@@ -99,7 +102,11 @@ and is labelled as a paid listing rather than independent editorial coverage.
 
 The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.
-The status and notice describe the experimental testnet, not a mainnet launch.
+The homepage identifies mainnet and testnet separately. The mainnet explorer
+shows the launched ConnectCoin network; the testnet explorer is labelled as a
+testing network. Test coins do not become mainnet coins. Keep each
+explorer destination clearly labelled so visitors do not confuse the networks.
+This static description is not a live availability or synchronization indicator.
 
 The authored homepage remains static and dependency-free, with no scripts,
 first-party analytics or cookies, remote font request, wallet connection, or
@@ -154,9 +161,10 @@ npm run check
 
 The same offline check runs in GitHub Actions. It checks local references,
 favicon PNG signatures and dimensions, the header brand's layout and image
-attributes, expected destination URLs, and the sole permitted iframe's
-attributes and labelled container. It does not verify external service uptime
-or the widget's displayed countdown. Also review the
+attributes, expected destination URLs, distinct and visibly labelled mainnet and
+testnet explorer links, current network copy and metadata, and the sole permitted
+iframe's attributes and labelled container. It does not verify external service
+uptime or the widget's displayed countdown. Also review the
 page in desktop and mobile browsers and confirm `/whitepaper.pdf` opens.
 
 ## Production hosting
@@ -166,8 +174,9 @@ server. No Node.js process is required in production. Preserve `/whitepaper.pdf`
 as a real PDF response (`Content-Type: application/pdf`), not a homepage rewrite.
 Use HTTPS for `connectcoincrypto.com`.
 
-`deploy/nginx.conf` is specific to the existing VPS and certificate paths. It
-serves `/var/www/connectcoin-website/current`, a symlink to a release containing
+`deploy/nginx.conf` is specific to the website VPS at `connectcoin2.com`
+(`82.25.65.36`) and its existing certificate paths. It serves
+`/var/www/connectcoin-website/current`, a symlink to a release containing
 only the contents of `dist/`. Do not expose the repository root, development
 scripts, or `.git/` publicly. Nginx serves `/` as the homepage, preserves the PDF
 response, and returns 404 for missing files instead of rewriting them to HTML.
@@ -176,6 +185,8 @@ HTTP requests, `connectcoin2.com`, and the VPS IP redirect to
 `https://connectcoincrypto.com`, preserving the requested path and query. The
 HTTP ACME challenge location and existing domain/IP certificates are preserved
 for certificate renewal. No node or wallet process is needed to serve the site.
+The historical certificate-directory name `connectcoin-vps3-ip` is retained in
+the Nginx configuration; it is not the current hostname or explorer destination.
 
 For each manual deployment:
 

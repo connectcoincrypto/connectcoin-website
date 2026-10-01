@@ -16,6 +16,16 @@ assert.equal(ids.length, new Set(ids).size, 'IDs must be unique');
 assert.match(html, /<html lang="en">/);
 assert.match(html, /<meta name="viewport"/);
 assert.match(html, /<meta name="description" content="[^"]+"/);
+for (const metadata of [
+  { field: 'description', pattern: /<meta name="description" content="([^"]+)"/ },
+  { field: 'og:description', pattern: /<meta property="og:description" content="([^"]+)"/ },
+]) {
+  const description = html.match(metadata.pattern)?.[1];
+  assert.ok(description, `Keep ${metadata.field} metadata`);
+  if (/\btestnet\b/i.test(description)) {
+    assert.match(description, /\bmainnet\b/i, `${metadata.field} must not present ConnectCoin as testnet-only`);
+  }
+}
 assert.match(html, /<link rel="canonical" href="https:\/\/connectcoincrypto\.com\/">/);
 const faviconLinks = [...html.matchAll(/<link\b[^>]*\brel="icon"[^>]*>/g)].map(match => match[0]);
 assert.equal(faviconLinks.length, 2, 'Provide the supplied logo as 32px and 192px PNG favicons');
@@ -35,7 +45,10 @@ for (const size of [32, 192]) {
   assert.equal(png.readUInt32BE(20), size, `Unexpected favicon height: ${path}`);
 }
 assert.equal((html.match(/<h1\b/g) || []).length, 1, 'Use one main heading');
-assert.match(html, /Test coins do not become mainnet coins/);
+assert.doesNotMatch(html, /\bTESTNET\s+BETA\b/i, 'Do not restore the outdated testnet-only launch badge');
+assert.doesNotMatch(html, /\bmainnet\s+(?:has\s+not|is\s+not|not\s+yet)\s+launched\b/i, 'Mainnet has launched');
+assert.doesNotMatch(html, /\bcurrently\s+on\s+testnet\b/i, 'Do not describe the project as currently testnet-only');
+assert.doesNotMatch(html, /<aside\b[^>]*\bclass="[^"]*\btestnet-notice\b/i, 'Do not restore the obsolete testnet-only notice');
 assert.match(css, /:focus-visible/);
 assert.match(css, /prefers-reduced-motion/);
 assert.match(css, /@media \(max-width: 640px\)/);
@@ -94,10 +107,32 @@ assert.match(heroImages[0][0], /\bfetchpriority="high"/);
 for (const expected of [
   'https://discord.gg/JYWbz5PsPp',
   'https://explorer.connectcoincrypto.com/',
+  'https://testnet.explorer.connectcoincrypto.com/',
   'https://github.com/connectcoincrypto/connectcoin',
   'https://github.com/connectcoincrypto/connectcoin#installation',
   '/whitepaper.pdf',
 ]) assert.ok(html.includes(`href="${expected}"`), `Missing destination: ${expected}`);
+
+const homepageLinks = [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
+for (const [destination, label] of [
+  ['https://explorer.connectcoincrypto.com/', 'Mainnet'],
+  ['https://testnet.explorer.connectcoincrypto.com/', 'Testnet'],
+]) {
+  const matches = homepageLinks.filter(link => link[1].includes(`href="${destination}"`));
+  assert.ok(matches.length > 0, `Provide the ${label} explorer link`);
+  for (const [, attributes, content] of matches) {
+    const visibleText = content
+      .replace(/<span\b[^>]*class="[^"]*\bsr-only\b[^"]*"[^>]*>[\s\S]*?<\/span>/g, '')
+      .replace(/<[^>]+>/g, ' ');
+    assert.match(visibleText, new RegExp(`\\b${label}\\b`, 'i'), `Visibly identify the ${label} explorer`);
+    if (label === 'Mainnet') {
+      assert.doesNotMatch(visibleText, /\btestnet\b/i, 'Do not label the mainnet explorer as testnet');
+    }
+    assert.match(attributes, /target="_blank"/);
+    assert.match(attributes, /rel="noopener noreferrer"/);
+    assert.match(content, /new tab/i, `Announce the new tab for the ${label} explorer`);
+  }
+}
 
 const projectListings = [...html.matchAll(/<a\b([^>]*href="https:\/\/chainquiry\.com\/projects\/connectcoin\/"[^>]*)>([\s\S]*?)<\/a>/g)];
 assert.equal(projectListings.length, 1, 'Include the exact Chainquiry project link once');

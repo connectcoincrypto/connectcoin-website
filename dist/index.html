@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#070d19">
-    <meta name="description" content="ConnectCoin is a peer-to-peer cryptocurrency with Pay-to-Connect. Explore the testnet, get the wallet, read the whitepaper, and join the community.">
+    <meta name="description" content="ConnectCoin is a peer-to-peer cryptocurrency with Pay-to-Connect. Explore the mainnet, get the wallet, read the whitepaper, and join the community.">
     <link rel="canonical" href="https://connectcoincrypto.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ConnectCoin">
     <meta property="og:title" content="ConnectCoin — Connections have value.">
-    <meta property="og:description" content="A peer-to-peer cryptocurrency with Pay-to-Connect. Explore the testnet and become part of the community.">
+    <meta property="og:description" content="A peer-to-peer cryptocurrency with Pay-to-Connect. Explore the mainnet and become part of the community.">
     <meta property="og:url" content="https://connectcoincrypto.com/">
     <title>ConnectCoin — Connections have value.</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
@@ -50,7 +50,7 @@
       <main id="main" tabindex="-1">
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero-copy">
-            <span class="eyebrow"><span class="beta-label">TESTNET BETA</span> A new kind of connection</span>
+            <span class="eyebrow"><span class="network-label">MAINNET</span> A new kind of connection</span>
             <h1 id="hero-title">Connections<br>have <span>value.</span></h1>
             <p class="hero-description">A peer-to-peer cryptocurrency with Pay-to-Connect. Send coins, create connection bounties, and claim rewards with verifiable TLS proofs.</p>
             <div class="hero-actions">
@@ -81,7 +81,7 @@
             <a class="resource-card" href="https://github.com/connectcoincrypto/connectcoin#installation" target="_blank" rel="noopener noreferrer">
               <div class="card-top"><span class="resource-icon"><svg class="icon" aria-hidden="true"><use href="#wallet"/></svg></span><svg class="icon card-arrow" aria-hidden="true"><use href="#external"/></svg></div>
               <h3>ConnectCoin Core</h3>
-              <p>Your wallet, full node, and optional CPU miner. Start here to join the testnet.</p>
+              <p>Your wallet, full node, and optional CPU miner. Start here to join the mainnet.</p>
               <span class="card-link">Installation guide <span class="card-meta">Windows · macOS · Linux +</span></span>
               <span class="sr-only">Opens the installation guide on GitHub in a new tab.</span>
             </a>
@@ -91,13 +91,15 @@
               <p>The ideas behind ConnectCoin, from TLS-based rewards to the rules of the network.</p>
               <span class="card-link">Read the paper <span class="card-meta">PDF · English</span></span>
             </a>
-            <a class="resource-card" href="https://explorer.connectcoincrypto.com/" target="_blank" rel="noopener noreferrer">
-              <div class="card-top"><span class="resource-icon"><svg class="icon" aria-hidden="true"><use href="#blocks"/></svg></span><svg class="icon card-arrow" aria-hidden="true"><use href="#external"/></svg></div>
-              <h3>Blockchain explorer</h3>
-              <p>Take a closer look at the testnet. Browse blocks, transactions, and network activity.</p>
-              <span class="card-link">Open the explorer <span class="card-meta">Testnet</span></span>
-              <span class="sr-only">Opens in a new tab.</span>
-            </a>
+            <article class="resource-card explorer-card" aria-labelledby="explorers-title">
+              <div class="card-top"><span class="resource-icon"><svg class="icon" aria-hidden="true"><use href="#blocks"/></svg></span></div>
+              <h3 id="explorers-title">Blockchain explorers</h3>
+              <p>Browse blocks, transactions, and network activity. Choose the network you want to explore.</p>
+              <div class="explorer-links">
+                <a class="explorer-link" href="https://explorer.connectcoincrypto.com/" target="_blank" rel="noopener noreferrer"><span>Mainnet explorer<span class="card-meta">Live network</span></span><svg class="icon card-arrow" aria-hidden="true"><use href="#external"/></svg><span class="sr-only">Opens in a new tab.</span></a>
+                <a class="explorer-link" href="https://testnet.explorer.connectcoincrypto.com/" target="_blank" rel="noopener noreferrer"><span>Testnet explorer<span class="card-meta">Testing network</span></span><svg class="icon card-arrow" aria-hidden="true"><use href="#external"/></svg><span class="sr-only">Opens in a new tab.</span></a>
+              </div>
+            </article>
             <a class="resource-card community-card" href="https://discord.gg/JYWbz5PsPp" target="_blank" rel="noopener noreferrer">
               <div class="card-top"><span class="resource-icon"><svg class="icon" aria-hidden="true"><use href="#community"/></svg></span><svg class="icon card-arrow" aria-hidden="true"><use href="#external"/></svg></div>
               <h3>ConnectCoin Community</h3>
@@ -167,7 +169,7 @@
             <a class="media-card" href="https://chainquiry.com/insights/what-is-connectcoin/" target="_blank" rel="noopener noreferrer">
               <div class="media-source"><span><svg class="icon" aria-hidden="true"><use href="#paper"/></svg>Chainquiry</span><span class="media-kind">Article</span></div>
               <h3>How ConnectCoin works</h3>
-              <p>A closer look at Pay-to-Connect, RandomX mining, and the public testnet.</p>
+              <p>A closer look at Pay-to-Connect and RandomX mining.</p>
               <span class="media-action">Read the article<svg class="icon card-arrow" aria-hidden="true"><use href="#external"/></svg></span>
               <span class="sr-only">Opens the Chainquiry article in a new tab.</span>
             </a>
@@ -192,11 +194,6 @@
             <span class="sr-only">Opens Chainquiry in a new tab.</span>
           </a>
         </section>
-
-        <aside class="testnet-notice" aria-labelledby="testnet-title">
-          <span class="notice-tag" id="testnet-title">Early by design.</span>
-          <p>ConnectCoin is experimental and currently on testnet. Mainnet has not launched. Test coins do not become mainnet coins.</p>
-        </aside>
       </main>
 
       <footer class="footer">
