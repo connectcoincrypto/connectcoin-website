@@ -141,29 +141,10 @@ assert.match(projectListings[0][1], /rel="noopener noreferrer"/);
 assert.match(projectListings[0][2], /<h3>ConnectCoin on Chainquiry<\/h3>/);
 assert.match(projectListings[0][2], /new tab/, 'Announce that Chainquiry opens in a new tab');
 
-const countdownUrl = 'https://chainquiry.com/?cq_countdown_embed=28104';
-const countdownSection = html.match(/<section class="countdown" id="countdown" aria-label="ConnectCoin countdown">([\s\S]*?)<\/section>/)?.[1];
-assert.ok(countdownSection, 'The countdown needs a labelled section with a stable anchor');
-assert.ok(html.indexOf('<section class="hero"') < html.indexOf('<section class="countdown"') && html.indexOf('<section class="countdown"') < html.indexOf('<section class="resources"'), 'Place the countdown between the hero and resources');
-const countdownFrames = [...html.matchAll(/<iframe\b[^>]*>/gi)];
-assert.equal(countdownFrames.length, 1, 'Allow only the requested Chainquiry countdown iframe');
-assert.ok(countdownSection.includes(countdownFrames[0][0]), 'Keep the iframe inside the countdown section');
-assert.equal((countdownSection.match(/<\/iframe\s*>/gi) || []).length, 1, 'Close the countdown iframe');
-const countdownAttributes = new Map([
-  ['src', countdownUrl],
-  ['title', 'ConnectCoin countdown by Chainquiry'],
-  ['loading', 'lazy'],
-  ['width', '100%'],
-  ['height', '250'],
-  ['style', 'width:100%;max-width:760px;height:250px;border:0;border-radius:22px;overflow:hidden;background:transparent'],
-  ['referrerpolicy', 'strict-origin-when-cross-origin'],
-]);
-const frameAttributes = [...countdownFrames[0][0].matchAll(/\s([a-z][a-z0-9-]*)="([^"]*)"/gi)];
-assert.equal(frameAttributes.length, countdownAttributes.size, 'Keep exactly the requested iframe attributes');
-assert.equal(new Set(frameAttributes.map(attribute => attribute[1])).size, frameAttributes.length, 'Do not repeat iframe attributes');
-for (const [, name, value] of frameAttributes) assert.equal(value, countdownAttributes.get(name), `Unexpected countdown iframe attribute: ${name}`);
-assert.match(countdownFrames[0][0].replace(/\s([a-z][a-z0-9-]*)="([^"]*)"/gi, ''), /^<iframe\s*>$/i, 'Do not add iframe attributes outside the approved configuration');
-assert.equal(countdownSection.trim(), `${countdownFrames[0][0]}</iframe>`, 'Keep only the iframe in the countdown section, without a visible heading or fallback link');
+assert.doesNotMatch(html, /countdown|cq_countdown_embed/i, 'Do not restore the removed countdown or its embed URL');
+assert.doesNotMatch(html, /<(?:iframe|embed|object)\b/i, 'The homepage must not load third-party embedded content');
+assert.doesNotMatch(css, /\.countdown\b/i, 'Remove unused countdown styles');
+assert.match(html, /<section class="hero"[^>]*>(?:(?!<\/section>)[\s\S])*<\/section>\s*<section class="resources"/, 'Keep resources directly after the hero without an empty countdown container');
 
 const mediaSection = html.match(/<section class="media" id="media" aria-labelledby="media-title">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(mediaSection, 'Media links need a labelled section with a stable anchor');
@@ -240,4 +221,4 @@ for (const script of ['serve.mjs', 'check.mjs']) {
   execFileSync(process.execPath, ['--check', resolve(root, 'scripts', script)], { stdio: 'pipe' });
 }
 console.log(`OK: page metadata, local assets, link targets, accessibility hooks, script syntax, PDF integrity (${pdf.length} bytes).`);
-console.log(`Public directory: ${(publicBytes / 1024).toFixed(1)} KiB. Static homepage without authored scripts or runtime dependencies; one external Chainquiry countdown iframe.`);
+console.log(`Public directory: ${(publicBytes / 1024).toFixed(1)} KiB. Static homepage without scripts, runtime dependencies, or third-party embeds.`);

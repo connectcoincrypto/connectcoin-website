@@ -5,7 +5,6 @@ ConnectCoin Core, the whitepaper, the blockchain explorer, and the community.
 It also features the video explainer and links to ConnectCoin's social accounts.
 The **ConnectCoin in Media** section collects published articles, announcements,
 external project profiles, and posts about the project.
-The countdown section loads the ConnectCoin widget hosted by Chainquiry.
 
 Production is served as static files by Nginx on `connectcoin2.com`
 (`82.25.65.36`). The mainnet explorer runs separately on `connectcoin3.com`;
@@ -70,7 +69,6 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Whitepaper:** `/whitepaper.pdf`
 - **BiFinance listing announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
-- **Chainquiry countdown:** https://chainquiry.com/?cq_countdown_embed=28104
 - **Chainquiry article:** https://chainquiry.com/insights/what-is-connectcoin/
 - **Medium article by Chainquiry:** https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068
 - **Reddit post:** https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/
@@ -84,13 +82,8 @@ The YouTube card opens the explainer video directly, not a channel page. Social
 links are plain links and do not load social players or embeds. Discord remains
 the main community link.
 
-The `#countdown` section between the hero and resources contains only one
-lazy-loaded Chainquiry iframe, sized to 100% width (up to 760px) and 250px height.
-The section has an accessible label, with no visible heading or fallback link.
-The widget requests content from Chainquiry and may execute JavaScript and use
-cookies under that third party's control. Chainquiry controls the displayed
-countdown; the homepage does not define a countdown date or claim that it marks
-a mainnet launch.
+The resources section follows the hero directly. The homepage does not embed
+third-party widgets; Chainquiry content is available through the Media links.
 
 The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
@@ -110,8 +103,8 @@ This static description is not a live availability or synchronization indicator.
 
 The authored homepage remains static and dependency-free, with no scripts,
 first-party analytics or cookies, remote font request, wallet connection, or
-live network-status polling. Its links work without scripts. The external
-countdown iframe has its own behavior as described above.
+live network-status polling. Its links work without scripts and it loads no
+third-party embeds.
 External links open in a new tab with accessible descriptions and safe
 `rel` attributes; the PDF opens in the current tab.
 
@@ -162,9 +155,9 @@ npm run check
 The same offline check runs in GitHub Actions. It checks local references,
 favicon PNG signatures and dimensions, the header brand's layout and image
 attributes, expected destination URLs, distinct and visibly labelled mainnet and
-testnet explorer links, current network copy and metadata, and the sole permitted
-iframe's attributes and labelled container. It does not verify external service
-uptime or the widget's displayed countdown. Also review the
+testnet explorer links, current network copy and metadata, and the absence of
+the removed countdown and third-party embeds. It does not verify external service
+uptime. Also review the
 page in desktop and mobile browsers and confirm `/whitepaper.pdf` opens.
 
 ## Production hosting
