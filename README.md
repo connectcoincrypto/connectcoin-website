@@ -67,6 +67,7 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Mainnet explorer:** https://explorer.connectcoincrypto.com/
 - **Testnet explorer:** https://testnet.explorer.connectcoincrypto.com/
 - **Whitepaper:** `/whitepaper.pdf`
+- **BiFinance CONN/USDT trading announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17981516798479-BiFinance-Will-List-the-CONN-USDT-Trading-Pair-Soon
 - **BiFinance listing announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
 - **Chainquiry article:** https://chainquiry.com/insights/what-is-connectcoin/
@@ -89,9 +90,12 @@ The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
 Keep sponsored posts and paid listings labelled; an external link is not a claim
 of independent endorsement. The Chainquiry profile appears here once, alongside
-the Chainquiry and Medium articles, the Reddit post, and the BiFinance listing
-announcement. The BiFinance card describes an upcoming listing, not live trading,
-and is labelled as a paid listing rather than independent editorial coverage.
+the Chainquiry and Medium articles, the Reddit post, and both BiFinance listing
+announcements. The newer BiFinance card reports the announced October 14, 2026,
+09:00 UTC schedule for CONN/USDT trading, deposits, and withdrawals; the earlier
+card describes the initial upcoming-listing announcement. Neither is a live
+availability indicator. Both are labelled as paid listings rather than
+independent editorial coverage.
 
 The wallet link intentionally opens the source installation instructions. Do
 not label it a direct binary download unless a verified release is provided.

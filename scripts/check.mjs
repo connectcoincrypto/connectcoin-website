@@ -152,7 +152,9 @@ assert.match(mediaSection, /<h2 id="media-title">ConnectCoin in Media\.<\/h2>/);
 assert.match(html, /<nav\b[^>]*>[\s\S]*?<a href="#media">Media<\/a>[\s\S]*?<\/nav>/, 'Make the media section reachable from the main navigation');
 const mediaLinks = [...mediaSection.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
 const bifinanceAnnouncement = 'https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon';
+const bifinanceTradingAnnouncement = 'https://bifinance.zendesk.com/hc/en-001/articles/17981516798479-BiFinance-Will-List-the-CONN-USDT-Trading-Pair-Soon';
 const expectedMediaLinks = new Map([
+  [bifinanceTradingAnnouncement, { publisher: 'BiFinance', sponsored: true }],
   [bifinanceAnnouncement, { publisher: 'BiFinance', sponsored: true }],
   ['https://chainquiry.com/insights/what-is-connectcoin/', { publisher: 'Chainquiry', sponsored: false }],
   ['https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068', { publisher: 'Medium', sponsored: false }],
@@ -172,6 +174,10 @@ for (const [destination, { publisher, sponsored }] of expectedMediaLinks) {
   if (destination === bifinanceAnnouncement) {
     assert.match(matches[0][2], /<h3>BiFinance Will List CONN Soon<\/h3>/, 'Use the published announcement title');
     assert.match(matches[0][2], /<p>BiFinance announces an upcoming listing of ConnectCoin \(CONN\)\.<\/p>/, 'An upcoming listing announcement must not imply trading is already live');
+  }
+  if (destination === bifinanceTradingAnnouncement) {
+    assert.match(matches[0][2], /<h3>BiFinance Will List the CONN\/USDT Trading Pair Soon<\/h3>/, 'Use the published trading announcement title');
+    assert.match(matches[0][2], /<p>BiFinance announces CONN\/USDT trading, deposits, and withdrawals scheduled for October 14, 2026 at 09:00 UTC\.<\/p>/, 'Describe the announced schedule without implying live availability');
   }
 }
 
