@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "preview": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs && node scripts/check-pages.mjs",
+    "check:releases": "node scripts/check-pages.mjs --live"
   }
 }

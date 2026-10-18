@@ -1,0 +1,217 @@
+{
+  "checked_on": "2026-10-18",
+  "products": [
+    {
+      "page": "/node.html",
+      "name": "ConnectCoin Core",
+      "repo": "connectcoincrypto/connectcoin",
+      "version": "v1.0.3",
+      "selection": "pinned",
+      "assets": [
+        {
+          "platform": "Windows",
+          "label": "Download for Windows",
+          "format": "MSI installer · x64",
+          "filename": "connectcoin-core-1.0.3-win64.msi",
+          "bytes": 33916197,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/connectcoin-core-1.0.3-win64.msi"
+        },
+        {
+          "platform": "macOS",
+          "label": "Apple Silicon",
+          "format": "DMG · arm64",
+          "filename": "connectcoin-core-1.0.3-macos-arm64.dmg",
+          "bytes": 31849565,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/connectcoin-core-1.0.3-macos-arm64.dmg"
+        },
+        {
+          "platform": "macOS",
+          "label": "Intel",
+          "format": "DMG · x86_64",
+          "filename": "connectcoin-core-1.0.3-macos-x86_64.dmg",
+          "bytes": 33779936,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/connectcoin-core-1.0.3-macos-x86_64.dmg"
+        },
+        {
+          "platform": "Linux",
+          "label": "Ubuntu / Debian",
+          "format": "DEB package",
+          "filename": "connectcoin-core_1.0.3-1ubuntu22.04_amd64.deb",
+          "bytes": 23082198,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/connectcoin-core_1.0.3-1ubuntu22.04_amd64.deb"
+        },
+        {
+          "platform": "Linux",
+          "label": "Fedora",
+          "format": "RPM package",
+          "filename": "connectcoin-core-1.0.3-1.fc43.x86_64.rpm",
+          "bytes": 25470993,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/connectcoin-core-1.0.3-1.fc43.x86_64.rpm"
+        },
+        {
+          "platform": "Linux",
+          "label": "AppImage",
+          "format": "Portable application",
+          "filename": "ConnectCoin-Core-1.0.3-x86_64.AppImage",
+          "bytes": 64715256,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/ConnectCoin-Core-1.0.3-x86_64.AppImage"
+        },
+        {
+          "platform": "Linux",
+          "label": "Portable archive",
+          "format": "TAR.GZ",
+          "filename": "connectcoin-1.0.3-linux-x86_64.tar.gz",
+          "bytes": 69360406,
+          "url": "https://github.com/connectcoincrypto/connectcoin/releases/download/v1.0.3/connectcoin-1.0.3-linux-x86_64.tar.gz"
+        }
+      ]
+    },
+    {
+      "page": "/wallet.html",
+      "name": "Connect Wallet",
+      "repo": "connectcoincrypto/connectcoin-connect-wallet",
+      "version": "v1.1.7",
+      "selection": "latest-stable-at-check",
+      "assets": [
+        {
+          "platform": "Windows",
+          "label": "Download for Windows",
+          "format": "EXE installer · x64",
+          "filename": "ConnectWallet-1.1.7-Windows-x64.exe",
+          "bytes": 114359311,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-Windows-x64.exe"
+        },
+        {
+          "platform": "Windows",
+          "label": "Windows MSI",
+          "format": "MSI installer · x64",
+          "filename": "ConnectWallet-1.1.7-Windows-x64.msi",
+          "bytes": 129343488,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-Windows-x64.msi"
+        },
+        {
+          "platform": "macOS",
+          "label": "Apple Silicon",
+          "format": "DMG · arm64",
+          "filename": "ConnectWallet-1.1.7-macOS-arm64.dmg",
+          "bytes": 133783725,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-macOS-arm64.dmg"
+        },
+        {
+          "platform": "macOS",
+          "label": "Intel",
+          "format": "DMG · x64",
+          "filename": "ConnectWallet-1.1.7-macOS-x64.dmg",
+          "bytes": 139329315,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-macOS-x64.dmg"
+        },
+        {
+          "platform": "macOS",
+          "label": "Apple Silicon archive",
+          "format": "ZIP · arm64",
+          "filename": "ConnectWallet-1.1.7-macOS-arm64.zip",
+          "bytes": 132375687,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-macOS-arm64.zip"
+        },
+        {
+          "platform": "macOS",
+          "label": "Intel archive",
+          "format": "ZIP · x64",
+          "filename": "ConnectWallet-1.1.7-macOS-x64.zip",
+          "bytes": 137943883,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-macOS-x64.zip"
+        },
+        {
+          "platform": "Linux",
+          "label": "Debian / Ubuntu",
+          "format": "DEB package",
+          "filename": "ConnectWallet-1.1.7-Linux-x64.deb",
+          "bytes": 102017384,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-Linux-x64.deb"
+        },
+        {
+          "platform": "Linux",
+          "label": "RPM distributions",
+          "format": "RPM package",
+          "filename": "ConnectWallet-1.1.7-Linux-x64.rpm",
+          "bytes": 91002013,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-Linux-x64.rpm"
+        },
+        {
+          "platform": "Linux",
+          "label": "AppImage",
+          "format": "Portable application",
+          "filename": "ConnectWallet-1.1.7-Linux-x64.AppImage",
+          "bytes": 128380425,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-Linux-x64.AppImage"
+        },
+        {
+          "platform": "Linux",
+          "label": "Portable archive",
+          "format": "TAR.GZ",
+          "filename": "ConnectWallet-1.1.7-Linux-x64.tar.gz",
+          "bytes": 122067335,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/v1.1.7/ConnectWallet-1.1.7-Linux-x64.tar.gz"
+        }
+      ]
+    },
+    {
+      "page": "/claimer.html",
+      "name": "connectcoin-claimer",
+      "repo": "connectcoincrypto/connectcoin-claimer",
+      "version": "v1.0.2",
+      "selection": "latest-stable-at-check",
+      "assets": [
+        {
+          "platform": "Windows",
+          "label": "Download for Windows",
+          "format": "Portable ZIP · x64",
+          "filename": "connectcoin-claimer-1.0.2-win-x64.zip",
+          "bytes": 35564239,
+          "url": "https://github.com/connectcoincrypto/connectcoin-claimer/releases/download/v1.0.2/connectcoin-claimer-1.0.2-win-x64.zip"
+        },
+        {
+          "platform": "macOS",
+          "label": "Apple Silicon",
+          "format": "Portable ZIP · arm64",
+          "filename": "connectcoin-claimer-1.0.2-macos-arm64.zip",
+          "bytes": 39992654,
+          "url": "https://github.com/connectcoincrypto/connectcoin-claimer/releases/download/v1.0.2/connectcoin-claimer-1.0.2-macos-arm64.zip"
+        },
+        {
+          "platform": "macOS",
+          "label": "Intel",
+          "format": "Portable ZIP · x64",
+          "filename": "connectcoin-claimer-1.0.2-macos-x64.zip",
+          "bytes": 41269156,
+          "url": "https://github.com/connectcoincrypto/connectcoin-claimer/releases/download/v1.0.2/connectcoin-claimer-1.0.2-macos-x64.zip"
+        },
+        {
+          "platform": "Linux",
+          "label": "Download for Linux",
+          "format": "Portable ZIP · x64",
+          "filename": "connectcoin-claimer-1.0.2-linux-x64.zip",
+          "bytes": 44021723,
+          "url": "https://github.com/connectcoincrypto/connectcoin-claimer/releases/download/v1.0.2/connectcoin-claimer-1.0.2-linux-x64.zip"
+        }
+      ]
+    },
+    {
+      "page": "/wallet.html",
+      "name": "Connect Wallet Mobile",
+      "repo": "connectcoincrypto/connectcoin-connect-wallet",
+      "version": "mobile-v1.0.1",
+      "selection": "pinned",
+      "assets": [
+        {
+          "platform": "Android",
+          "label": "Download for Android",
+          "format": "APK · arm64 / x86_64",
+          "filename": "ConnectWallet-Mobile-v1.0.1-Android.apk",
+          "bytes": 11953395,
+          "url": "https://github.com/connectcoincrypto/connectcoin-connect-wallet/releases/download/mobile-v1.0.1/ConnectWallet-Mobile-v1.0.1-Android.apk"
+        }
+      ]
+    }
+  ]
+}

@@ -142,6 +142,94 @@ h1 span { color: var(--accent); }
 .footer a:hover { color: var(--accent); }
 .footer .icon { width: 17px; height: 17px; }
 
+/* Shared, script-free navigation: each tab is a real page. */
+.site-tabs { display: flex; gap: 12px; padding-top: 8px; border-bottom: 1px solid var(--line); }
+.site-tabs a { position: relative; display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 61px; padding: 0 20px; color: var(--muted); font-size: .9375rem; white-space: nowrap; transition: color .2s, background .2s; }
+.site-tabs .icon { width: 19px; height: 19px; }
+.site-tabs a:hover { color: var(--text); background: #43e6c608; }
+.site-tabs a[aria-current="page"] { color: var(--accent); background: linear-gradient(0deg, #43e6c60c, transparent); }
+.site-tabs a[aria-current="page"]::after { content: ""; position: absolute; bottom: -1px; left: 14px; right: 14px; height: 2px; background: var(--accent); }
+.section-intro { padding: 62px 0 38px; max-width: 800px; }
+.section-intro h1 { font-size: clamp(2.75rem, 5.4vw, 4.4rem); line-height: 1.08; margin: 20px 0; letter-spacing: -.055em; }
+.section-intro .hero-description { max-width: 690px; }
+.section-intro .eyebrow { text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; }
+.release-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 20px 0; margin-bottom: 16px; border-block: 1px solid var(--line); }
+.release-identity { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; }
+.release-identity strong { font-size: 1rem; font-weight: 600; }
+.release-version { font-family: Consolas, "Liberation Mono", monospace; color: var(--accent); padding: 5px 9px; border: 1px solid #29544e; border-radius: 5px; background: #113b342b; font-size: .8125rem; }
+.text-link { display: inline-flex; align-items: center; gap: 7px; color: #c1cddd; font-size: .875rem; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: #506276; }
+.text-link:hover { color: var(--accent); }
+.text-link .icon { width: 16px; height: 16px; }
+.download-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.downloads + .downloads { margin-top: 40px; }
+.mobile-download-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 32px; align-items: start; }
+.mobile-download-grid .download-list { display: flex; }
+.mobile-download-info { padding: 8px 0; }
+.mobile-download-info h2 { margin: 0 0 14px; font-size: 1.5rem; font-weight: 500; letter-spacing: -.03em; }
+.mobile-download-info h3 { margin: 22px 0 9px; font-size: 1rem; font-weight: 600; }
+.mobile-download-info p { margin: 0; color: var(--muted); font-size: .9375rem; line-height: 1.7; }
+.mobile-download-info .download-note { margin-top: 18px; font-size: .8125rem; }
+.download-card { min-width: 0; padding: 26px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(140deg, #101d2c, #0c1422); }
+.platform-heading { display: flex; align-items: center; gap: 13px; margin-bottom: 23px; }
+.platform-heading .resource-icon { width: 42px; height: 42px; color: var(--accent); }
+.platform-heading h2 { margin: 0 0 4px; font-size: 1.25rem; font-weight: 550; letter-spacing: -.025em; }
+.platform-heading p { margin: 0; font-size: .8125rem; color: var(--muted); line-height: 1.5; }
+.download-list { display: flex; flex-direction: column; gap: 10px; }
+.download-link { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 70px; padding: 13px 14px; border: 1px solid #34465a; border-radius: 7px; background: #0b1422; transition: border-color .2s, background .2s; }
+.download-link:hover { border-color: var(--accent); background: #112c30; }
+.download-link > span { min-width: 0; }
+.download-link strong { display: block; font-size: .875rem; font-weight: 600; line-height: 1.5; }
+.download-link small { display: block; margin-top: 3px; color: var(--muted); font-size: .75rem; line-height: 1.4; }
+.download-link .icon { width: 18px; height: 18px; color: var(--accent); }
+.download-link.recommended { border-color: #36786b; background: #10322e; }
+.download-note { margin: 21px 0 0; color: #a0acc0; font-size: .8125rem; line-height: 1.7; }
+.release-details { margin-top: 20px; display: flex; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap; }
+.release-details p { margin: 0; max-width: 690px; color: var(--muted); font-size: .8125rem; line-height: 1.7; }
+.supporting-info { margin-top: 42px; padding-top: 30px; border-top: 1px solid var(--line); }
+.supporting-info h2 { margin: 0 0 22px; font-size: 1.5rem; font-weight: 500; letter-spacing: -.03em; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.feature-grid h3 { margin: 0 0 9px; font-size: 1rem; font-weight: 600; }
+.feature-grid p { margin: 0; font-size: .9375rem; color: var(--muted); line-height: 1.7; }
+.feature-grid code { color: #dce8f0; overflow-wrap: anywhere; }
+.product-switch { margin: 30px 0 40px; padding: 18px 22px; border-left: 2px solid #347e71; background: #10282b66; color: #aebed0; font-size: .875rem; line-height: 1.7; }
+.product-switch a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.exchange-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.exchange-card { padding: 30px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(130deg, #112332, #0c1523); }
+.exchange-heading { display: flex; align-items: center; gap: 16px; }
+.exchange-mark { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid #345f5a; border-radius: 12px; background: #133c35; color: var(--accent); font-size: 1.7rem; font-weight: 650; }
+.exchange-heading h2 { margin: 0 0 5px; font-size: 1.5rem; font-weight: 550; letter-spacing: -.035em; }
+.exchange-heading p { margin: 0; color: var(--muted); font-size: .8125rem; }
+.exchange-pair { display: flex; justify-content: space-between; align-items: center; margin: 30px 0 20px; padding-block: 17px; border-block: 1px solid var(--line); }
+.exchange-pair span { color: var(--muted); font-size: .875rem; }
+.exchange-pair strong { font-family: Consolas, "Liberation Mono", monospace; font-weight: 500; font-size: 1.2rem; }
+.exchange-card > p { color: var(--muted); line-height: 1.7; font-size: .9375rem; margin: 0 0 24px; }
+.exchange-card .button { width: 100%; }
+
+@media (max-width: 1050px) {
+  .download-card { padding: 20px; }
+  .site-tabs { gap: 4px; }
+}
+@media (max-width: 800px) {
+  .download-grid { grid-template-columns: 1fr; }
+  .mobile-download-grid { grid-template-columns: 1fr; gap: 20px; }
+  .download-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feature-grid { gap: 24px; }
+  .exchange-card { padding: 23px; }
+}
+@media (max-width: 640px) {
+  .site-tabs { gap: 0; }
+  .site-tabs a { flex: 1; min-width: 0; flex-direction: column; gap: 6px; padding: 10px 3px 12px; min-height: 69px; font-size: .75rem; }
+  .site-tabs a[aria-current="page"]::after { left: 4px; right: 4px; }
+  .site-tabs a:focus-visible { outline-offset: -3px; }
+  .section-intro { padding: 36px 0 28px; }
+  .section-intro h1 { font-size: clamp(2.45rem, 10vw, 3.5rem); }
+  .release-bar { gap: 14px; }
+  .download-list, .feature-grid, .exchange-grid { grid-template-columns: 1fr; }
+  .download-card { padding: 23px; }
+  .supporting-info { margin-top: 32px; }
+  .product-switch { margin-bottom: 30px; }
+}
+
 @media (min-width: 1450px) { .hero { padding-top: 103px; padding-bottom: 110px; } }
 @media (max-width: 1050px) {
   .page-shell { padding: 0 32px; }

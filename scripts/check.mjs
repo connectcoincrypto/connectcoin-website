@@ -222,7 +222,13 @@ async function checkPublicFiles(directory) {
   }
 }
 await checkPublicFiles(publicRoot);
-assert.ok(publicBytes < 1_100_000, 'Keep the entire site, including PDF, below 1.1 MB');
+// Five standalone pages share the same small stylesheet and existing media.
+// Keep both each document and the complete deployable directory bounded.
+for (const page of ['index.html', 'trading.html', 'node.html', 'wallet.html', 'claimer.html']) {
+  assert.ok((await stat(resolve(publicRoot, page))).size < 30_000, `Keep ${page} below 30 kB`);
+}
+assert.ok(Buffer.byteLength(css) < 30_000, 'Keep the shared stylesheet below 30 kB');
+assert.ok(publicBytes < 1_200_000, 'Keep the five-page site, including PDF, below 1.2 MB');
 for (const script of ['serve.mjs', 'check.mjs']) {
   execFileSync(process.execPath, ['--check', resolve(root, 'scripts', script)], { stdio: 'pipe' });
 }

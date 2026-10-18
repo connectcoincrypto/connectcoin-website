@@ -6,6 +6,31 @@ It also features the video explainer and links to ConnectCoin's social accounts.
 The **ConnectCoin in Media** section collects published articles, announcements,
 external project profiles, and posts about the project.
 
+The shared navigation has five tabs. Each is a real, directly addressable static
+page, so navigation, browser Back/Forward, and downloads work without JavaScript:
+
+- **Overview** (`/`) retains the existing homepage, resources, media, and socials.
+- **Trading** (`/trading.html`) explains the external CONN/USDT markets and links
+  to BiFinance and KpowBIT.
+- **Node** (`/node.html`) explains the full node and offers Core **v1.0.3**.
+- **Wallet** (`/wallet.html`) offers the latest checked stable desktop release,
+  Connect Wallet **v1.1.7**, plus **Mobile v1.0.1** as a signed Android APK.
+  The mobile download supports Android 7.0+, ARM64/x86_64, and WebView 105+;
+  no installable iOS package is advertised.
+- **Claimer** (`/claimer.html`) explains the terminal client and offers the latest
+  checked stable release, **v1.0.2**, as portable ZIPs only.
+
+Download buttons link directly to exact, versioned GitHub release assets, not to
+release listing pages. The binaries remain hosted on GitHub; this repository does
+not mirror them or proxy downloads. Release notes and checksum links are separate.
+The version/filename/size snapshot was checked on **2026-10-18** and is recorded in
+`scripts/releases.json`. There is no browser-side API polling or automatic update
+to unverified releases. When refreshing Wallet or Claimer, verify the latest
+non-prerelease assets, then update both the page and this snapshot together. Keep
+Core pinned to v1.0.3 until explicitly updating it.
+Mobile is tracked separately through the exact `mobile-v1.0.1` release tag;
+the repository's latest-release endpoint continues to select the desktop release.
+
 Production is served as static files by Nginx on `connectcoin2.com`
 (`82.25.65.36`). The mainnet explorer runs separately on `connectcoin3.com`;
 the testnet explorer is a separate service too. GitHub Actions validates changes
@@ -41,6 +66,8 @@ npm run dev
 | File | Purpose |
 | --- | --- |
 | `dist/index.html` | Homepage copy, navigation, metadata, and inline icons |
+| `dist/trading.html` | Exchange explanations and direct market links |
+| `dist/node.html`, `dist/wallet.html`, `dist/claimer.html` | Product descriptions and direct downloads by platform |
 | `dist/assets/site.css` | Responsive layout and visual theme |
 | `dist/assets/connectcoin.png` | Original 256px ConnectCoin logo, retained but no longer displayed |
 | `dist/assets/connectcoin-hero.png` | Original 1024px ConnectCoin logo, displayed in the hero card |
@@ -52,6 +79,7 @@ npm run dev
 | `dist/robots.txt`, `dist/sitemap.xml` | Crawler discovery metadata for the final domain |
 | `scripts/serve.mjs` | Dependency-free local preview server |
 | `scripts/check.mjs` | Static resource, link, and PDF integrity checks |
+| `scripts/check-pages.mjs`, `scripts/releases.json` | Navigation/download checks and the verified release snapshot |
 | `deploy/nginx.conf` | Production virtual hosts, redirects, and PDF handling |
 
 `dist/` is the **authored, tracked website**, not a disposable build directory.
@@ -97,8 +125,9 @@ card describes the initial upcoming-listing announcement. Neither is a live
 availability indicator. Both are labelled as paid listings rather than
 independent editorial coverage.
 
-The wallet link intentionally opens the source installation instructions. Do
-not label it a direct binary download unless a verified release is provided.
+The existing Overview links still open the Core installation instructions. The
+Node, Wallet, and Claimer tabs instead offer verified direct release downloads.
+Never label source archives, reports, or unverified URLs as application downloads.
 The homepage identifies mainnet and testnet separately. The mainnet explorer
 shows the launched ConnectCoin network; the testnet explorer is labelled as a
 testing network. Test coins do not become mainnet coins. Keep each
@@ -163,6 +192,11 @@ testnet explorer links, current network copy and metadata, and the absence of
 the removed countdown and third-party embeds. It does not verify external service
 uptime. Also review the
 page in desktop and mobile browsers and confirm `/whitepaper.pdf` opens.
+
+`npm run check:releases` additionally compares the download snapshot with GitHub's
+public release API. It requires internet access, does not download binaries, and
+does not modify or publish anything. If a newer stable release exists, review it
+before updating the static snapshot; do not silently rewrite the download URLs.
 
 ## Production hosting
 
