@@ -110,8 +110,9 @@ for (const expected of [
   'https://testnet.explorer.connectcoincrypto.com/',
   'https://github.com/connectcoincrypto/connectcoin',
   'https://github.com/connectcoincrypto/connectcoin#installation',
-  '/whitepaper.pdf',
+  '/whitepaper.html',
 ]) assert.ok(html.includes(`href="${expected}"`), `Missing destination: ${expected}`);
+assert.doesNotMatch(html, /href="\/whitepaper\.pdf(?:[?#][^"]*)?"/, 'Homepage Whitepaper links must keep the site navigation visible');
 
 const homepageLinks = [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
 for (const [destination, label] of [
@@ -222,13 +223,13 @@ async function checkPublicFiles(directory) {
   }
 }
 await checkPublicFiles(publicRoot);
-// Five standalone pages share the same small stylesheet and existing media.
+// Six standalone pages share the same small stylesheet and existing media.
 // Keep both each document and the complete deployable directory bounded.
-for (const page of ['index.html', 'trading.html', 'node.html', 'wallet.html', 'claimer.html']) {
+for (const page of ['index.html', 'whitepaper.html', 'trading.html', 'node.html', 'wallet.html', 'claimer.html']) {
   assert.ok((await stat(resolve(publicRoot, page))).size < 30_000, `Keep ${page} below 30 kB`);
 }
 assert.ok(Buffer.byteLength(css) < 30_000, 'Keep the shared stylesheet below 30 kB');
-assert.ok(publicBytes < 1_200_000, 'Keep the five-page site, including PDF, below 1.2 MB');
+assert.ok(publicBytes < 1_200_000, 'Keep the six-page site, including PDF, below 1.2 MB');
 for (const script of ['serve.mjs', 'check.mjs']) {
   execFileSync(process.execPath, ['--check', resolve(root, 'scripts', script)], { stdio: 'pipe' });
 }

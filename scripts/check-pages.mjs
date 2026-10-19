@@ -8,8 +8,8 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const publicRoot = resolve(root, 'dist');
 const origin = 'https://connectcoincrypto.com';
-const routes = ['/', '/trading.html', '/node.html', '/wallet.html', '/claimer.html'];
-const tabLabels = ['Overview', 'Trading', 'Node', 'Wallet', 'Claimer'];
+const routes = ['/', '/whitepaper.html', '/trading.html', '/node.html', '/wallet.html', '/claimer.html'];
+const tabLabels = ['Overview', 'Whitepaper', 'Trading', 'Node', 'Wallet', 'Claimer'];
 const expectedProducts = new Map([
   ['/node.html', ['connectcoincrypto/connectcoin', 'pinned']],
   ['/wallet.html', ['connectcoincrypto/connectcoin-connect-wallet', 'latest-stable-at-check']],
@@ -159,7 +159,7 @@ for (const [route, page] of pages) {
   const tabs = one(select('nav').filter(node => hasClass(node, 'site-tabs')), `${route}: one tab navigation`);
   assert.ok(tabs.attrs['aria-label'], `${route}: labelled tab navigation`);
   const tabLinks = descendants(tabs).filter(node => node.tag === 'a');
-  assert.deepEqual(tabLinks.map(node => node.attrs.href), routes, `${route}: all five real tabs, in consistent order`);
+  assert.deepEqual(tabLinks.map(node => node.attrs.href), routes, `${route}: all six real tabs, in consistent order`);
   assert.deepEqual(tabLinks.map(text), tabLabels, `${route}: consistent tab labels`);
   const current = one(nodes.filter(node => Object.hasOwn(node.attrs, 'aria-current')), `${route}: exactly one current page`);
   assert.ok(tabLinks.includes(current), `${route}: current page belongs to tab navigation`);
@@ -170,9 +170,26 @@ for (const [route, page] of pages) {
   if (navigationSignature) assert.deepEqual(signature, navigationSignature, `${route}: consistent header navigation`);
   else navigationSignature = signature;
   assert.ok(signature.some(([href]) => href === `${origin}/#media`), `${route}: media link reaches the home section`);
+  assert.ok(signature.some(([href]) => href === `${origin}/whitepaper.html`), `${route}: header Whitepaper link stays inside the site`);
+
+  const pdfObjects = select('object');
+  assert.equal(pdfObjects.length, route === '/whitepaper.html' ? 1 : 0, `${route}: allow only the Whitepaper page's PDF viewer`);
+  if (route === '/whitepaper.html') {
+    const viewer = pdfObjects[0];
+    assert.ok(descendants(main).includes(viewer), 'Whitepaper PDF viewer belongs inside main');
+    assert.equal(viewer.attrs.data, '/whitepaper.pdf#view=FitH', 'Embed only the existing same-origin PDF');
+    assert.equal(viewer.attrs.type, 'application/pdf', 'Declare the PDF content type');
+    assert.match(viewer.attrs['aria-label'] ?? '', /\bwhitepaper\b/i, 'PDF viewer needs a meaningful accessible Whitepaper label');
+    const allowedAttributes = new Set(['class', 'id', 'data', 'type', 'aria-label', 'aria-describedby', 'title', 'width', 'height']);
+    assert.ok(Object.keys(viewer.attrs).every(attribute => allowedAttributes.has(attribute)), 'PDF viewer must not introduce active plugin or remote-resource attributes');
+    const pdfLinks = select('a').filter(node => node.attrs.href === '/whitepaper.pdf');
+    assert.ok(pdfLinks.some(node => descendants(viewer).includes(node)), 'PDF viewer needs a named fallback link to the PDF');
+    assert.ok(pdfLinks.some(node => Object.hasOwn(node.attrs, 'download')), 'Keep an explicit PDF download link');
+    assert.ok(pdfLinks.some(node => node.attrs.target === '_blank'), 'Keep a separately accessible PDF link for browsers without inline viewing');
+  }
 
   for (const node of nodes) {
-    assert.ok(!['script', 'iframe', 'embed', 'object', 'base'].includes(node.tag), `${route}: no scripts, embeds, or base overrides`);
+    assert.ok(!['script', 'iframe', 'embed', 'param', 'base'].includes(node.tag), `${route}: no scripts, other embeds, plugin parameters, or base overrides`);
     assert.ok(!Object.keys(node.attrs).some(name => /^on/i.test(name) || name === 'srcdoc'), `${route}: no executable event attributes`);
     for (const name of ['aria-labelledby', 'aria-describedby']) {
       if (node.attrs[name]) for (const id of node.attrs[name].split(/\s+/)) assert.ok(ids.has(id), `${route}: ${name} references missing ID ${id}`);
@@ -190,7 +207,7 @@ for (const [route, page] of pages) {
         assert.ok(rel.has('noopener') && rel.has('noreferrer'), `${route}: safe new-tab rel for ${node.attrs.href}`);
       }
     }
-    for (const attribute of ['href', 'src', 'poster', 'xlink:href']) {
+    for (const attribute of ['href', 'src', 'poster', 'xlink:href', ...(node.tag === 'object' ? ['data'] : [])]) {
       if (!Object.hasOwn(node.attrs, attribute)) continue;
       const ref = node.attrs[attribute];
       assert.ok(ref && !ref.startsWith('//'), `${route}: explicit nonempty reference`);
@@ -200,6 +217,7 @@ for (const [route, page] of pages) {
       const targetRoute = url.pathname === '/index.html' ? '/' : url.pathname;
       assert.ok((await lstat(publicPath(url.pathname))).isFile(), `${route}: missing local file ${ref}`);
       if (url.hash) {
+        if (node.tag === 'object' && attribute === 'data' && ref === '/whitepaper.pdf#view=FitH') continue;
         const target = pages.get(targetRoute);
         assert.ok(target, `${route}: anchor target must be a checked page: ${ref}`);
         assert.ok(target.ids.has(decodeURIComponent(url.hash.slice(1))), `${route}: missing anchor/SVG symbol ${ref}`);

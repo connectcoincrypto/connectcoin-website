@@ -6,10 +6,13 @@ It also features the video explainer and links to ConnectCoin's social accounts.
 The **ConnectCoin in Media** section collects published articles, announcements,
 external project profiles, and posts about the project.
 
-The shared navigation has five tabs. Each is a real, directly addressable static
+The shared navigation has six tabs. Each is a real, directly addressable static
 page, so navigation, browser Back/Forward, and downloads work without JavaScript:
 
 - **Overview** (`/`) retains the existing homepage, resources, media, and socials.
+- **Whitepaper** (`/whitepaper.html`) displays the original, same-origin PDF
+  inside the site, with the shared navigation above it. Download and separate-tab
+  links remain available for browsers without inline PDF support.
 - **Trading** (`/trading.html`) explains the external CONN/USDT markets and links
   to BiFinance and KpowBIT.
 - **Node** (`/node.html`) explains the full node and offers Core **v1.0.3**.
@@ -66,6 +69,7 @@ npm run dev
 | File | Purpose |
 | --- | --- |
 | `dist/index.html` | Homepage copy, navigation, metadata, and inline icons |
+| `dist/whitepaper.html` | In-site PDF reader with download and fallback links |
 | `dist/trading.html` | Exchange explanations and direct market links |
 | `dist/node.html`, `dist/wallet.html`, `dist/claimer.html` | Product descriptions and direct downloads by platform |
 | `dist/assets/site.css` | Responsive layout and visual theme |
@@ -94,7 +98,7 @@ no registered Site, deployment ID, or automatic publication configured.
 - **Community:** https://discord.gg/JYWbz5PsPp
 - **Mainnet explorer:** https://explorer.connectcoincrypto.com/
 - **Testnet explorer:** https://testnet.explorer.connectcoincrypto.com/
-- **Whitepaper:** `/whitepaper.pdf`
+- **Whitepaper:** `/whitepaper.html` (original file: `/whitepaper.pdf`)
 - **BiFinance CONN/USDT trading announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17981516798479-BiFinance-Will-List-the-CONN-USDT-Trading-Pair-Soon
 - **BiFinance listing announcement:** https://bifinance.zendesk.com/hc/en-001/articles/17753109448975-BiFinance-Will-List-CONN-Soon
 - **Chainquiry project profile:** https://chainquiry.com/projects/connectcoin/
@@ -139,7 +143,10 @@ first-party analytics or cookies, remote font request, wallet connection, or
 live network-status polling. Its links work without scripts and it loads no
 third-party embeds.
 External links open in a new tab with accessible descriptions and safe
-`rel` attributes; the PDF opens in the current tab.
+`rel` attributes. Whitepaper links lead to the in-site reader. That page alone
+embeds the existing local PDF using the browser's native viewer; it does not load
+a third-party reader or change the document. Its explicit download and new-tab
+links keep the reader page available if inline PDF viewing is unsupported.
 
 ## Update the whitepaper
 
@@ -191,7 +198,9 @@ attributes, expected destination URLs, distinct and visibly labelled mainnet and
 testnet explorer links, current network copy and metadata, and the absence of
 the removed countdown and third-party embeds. It does not verify external service
 uptime. Also review the
-page in desktop and mobile browsers and confirm `/whitepaper.pdf` opens.
+page in desktop and mobile browsers and confirm `/whitepaper.html` displays the
+PDF, with download/new-tab fallbacks available. `/whitepaper.pdf` stays a real
+PDF response for direct links and older bookmarks.
 
 `npm run check:releases` additionally compares the download snapshot with GitHub's
 public release API. It requires internet access, does not download binaries, and
