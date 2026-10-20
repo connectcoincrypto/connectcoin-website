@@ -125,9 +125,10 @@ tab and is labelled as a sponsored listing. The Media links remain available.
 The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
 Keep sponsored posts and paid listings labelled; an external link is not a claim
-of independent endorsement. The Chainquiry profile appears once in Media, alongside
-the Chainquiry and Medium articles, the Reddit post, and both BiFinance listing
-announcements. The newer BiFinance card reports the announced October 14, 2026,
+of independent endorsement. The Chainquiry profile is linked only through the
+badge above the resources; the duplicate lower profile card has been removed.
+Media retains the Chainquiry and Medium articles, the Reddit post, and both
+BiFinance listing announcements. The newer BiFinance card reports the announced October 14, 2026,
 09:00 UTC schedule for CONN/USDT trading, deposits, and withdrawals; the earlier
 card describes the initial upcoming-listing announcement. Neither is a live
 availability indicator. Both are labelled as paid listings rather than

@@ -136,7 +136,7 @@ for (const [destination, label] of [
 }
 
 const projectListings = [...html.matchAll(/<a\b([^>]*href="https:\/\/chainquiry\.com\/projects\/connectcoin\/"[^>]*)>([\s\S]*?)<\/a>/g)];
-assert.equal(projectListings.length, 2, 'Include the Chainquiry project link in the profile badge and Media card');
+assert.equal(projectListings.length, 1, 'Keep the Chainquiry project link only in the profile badge');
 for (const [, attributes] of projectListings) {
   assert.match(attributes, /target="_blank"/);
   assert.match(attributes, /rel="noopener noreferrer"/);
@@ -172,9 +172,8 @@ assert.match(badgeImages[0][0], /decoding="async"/);
 assert.match(badgeImages[0][0], /alt="Listed on Chainquiry"/);
 assert.match(badgeImages[0][0], /width="288"/);
 assert.match(badgeImages[0][0], /height="72"/);
-const mediaProjectListings = projectListings.filter(link => /<h3>ConnectCoin on Chainquiry<\/h3>/.test(link[2]));
-assert.equal(mediaProjectListings.length, 1, 'Retain the Chainquiry Media card');
-assert.match(mediaProjectListings[0][2], /new tab/, 'Announce that the Chainquiry Media card opens in a new tab');
+assert.doesNotMatch(html, /project-listing|listing-heading|<h3>ConnectCoin on Chainquiry<\/h3>/, 'Do not restore the duplicate lower Chainquiry profile card');
+assert.doesNotMatch(css, /\.project-listing\b|\.listing-heading\b/, 'Remove styles used only by the deleted profile card');
 
 assert.doesNotMatch(html, /countdown|cq_countdown_embed/i, 'Do not restore the removed countdown or its embed URL');
 assert.doesNotMatch(html, /<(?:iframe|embed|object)\b/i, 'The homepage must not load third-party embedded content');
@@ -194,7 +193,6 @@ const expectedMediaLinks = new Map([
   ['https://chainquiry.com/insights/what-is-connectcoin/', { publisher: 'Chainquiry', sponsored: false }],
   ['https://medium.com/@chainquiry/what-if-an-https-connection-could-unlock-a-crypto-reward-1772ad96f068', { publisher: 'Medium', sponsored: false }],
   ['https://www.reddit.com/r/chainquiry/comments/1wimfpk/sponsored_what_if_an_https_connection_itself/', { publisher: 'Reddit', sponsored: true }],
-  ['https://chainquiry.com/projects/connectcoin/', { publisher: 'Chainquiry', sponsored: true }],
 ]);
 assert.equal(mediaLinks.length, expectedMediaLinks.size, 'Include only the verified published media destinations');
 for (const [destination, { publisher, sponsored }] of expectedMediaLinks) {
