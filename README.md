@@ -115,13 +115,17 @@ The YouTube card opens the explainer video directly, not a channel page. Social
 links are plain links and do not load social players or embeds. Discord remains
 the main community link.
 
-The resources section follows the hero directly. The homepage does not embed
-third-party widgets; Chainquiry content is available through the Media links.
+A linked Chainquiry badge appears between the hero and the resources section.
+It uses the supplied dark, standard-size image (288 × 72), scales down on narrow
+screens, and selects the still image when `prefers-reduced-motion: reduce` is set.
+Both image variants are served directly by Chainquiry; this adds an external image
+request, not a script or iframe. The badge links to the project profile in a new
+tab and is labelled as a sponsored listing. The Media links remain available.
 
 The Media navigation link points to `/#media`. Add only published, verified
 destinations to that section, with a short description and the publisher's name.
 Keep sponsored posts and paid listings labelled; an external link is not a claim
-of independent endorsement. The Chainquiry profile appears here once, alongside
+of independent endorsement. The Chainquiry profile appears once in Media, alongside
 the Chainquiry and Medium articles, the Reddit post, and both BiFinance listing
 announcements. The newer BiFinance card reports the announced October 14, 2026,
 09:00 UTC schedule for CONN/USDT trading, deposits, and withdrawals; the earlier
@@ -140,8 +144,8 @@ This static description is not a live availability or synchronization indicator.
 
 The authored homepage remains static and dependency-free, with no scripts,
 first-party analytics or cookies, remote font request, wallet connection, or
-live network-status polling. Its links work without scripts and it loads no
-third-party embeds.
+live network-status polling. Its links work without scripts; the Chainquiry badge
+is an externally hosted image, with no third-party scripts or embedded documents.
 External links open in a new tab with accessible descriptions and safe
 `rel` attributes. Whitepaper links lead to the in-site reader. That page alone
 embeds the existing local PDF using the browser's native viewer; it does not load
@@ -196,7 +200,8 @@ The same offline check runs in GitHub Actions. It checks local references,
 favicon PNG signatures and dimensions, the header brand's layout and image
 attributes, expected destination URLs, distinct and visibly labelled mainnet and
 testnet explorer links, current network copy and metadata, and the absence of
-the removed countdown and third-party embeds. It does not verify external service
+the removed countdown and embedded documents, plus the badge's placement, image
+URLs, reduced-motion alternative, and sponsored label. It does not verify external service
 uptime. Also review the
 page in desktop and mobile browsers and confirm `/whitepaper.html` displays the
 PDF, with download/new-tab fallbacks available. `/whitepaper.pdf` stays a real

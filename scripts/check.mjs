@@ -136,16 +136,50 @@ for (const [destination, label] of [
 }
 
 const projectListings = [...html.matchAll(/<a\b([^>]*href="https:\/\/chainquiry\.com\/projects\/connectcoin\/"[^>]*)>([\s\S]*?)<\/a>/g)];
-assert.equal(projectListings.length, 1, 'Include the exact Chainquiry project link once');
-assert.match(projectListings[0][1], /target="_blank"/);
-assert.match(projectListings[0][1], /rel="noopener noreferrer"/);
-assert.match(projectListings[0][2], /<h3>ConnectCoin on Chainquiry<\/h3>/);
-assert.match(projectListings[0][2], /new tab/, 'Announce that Chainquiry opens in a new tab');
+assert.equal(projectListings.length, 2, 'Include the Chainquiry project link in the profile badge and Media card');
+for (const [, attributes] of projectListings) {
+  assert.match(attributes, /target="_blank"/);
+  assert.match(attributes, /rel="noopener noreferrer"/);
+}
+const profileBadges = [...html.matchAll(/<div class="profile-badge">([\s\S]*?)<\/div>/g)];
+assert.equal(profileBadges.length, 1, 'Include the supplied Chainquiry profile badge once');
+const profileBadge = profileBadges[0][1];
+assert.match(profileBadge, /<span class="profile-badge-note">Sponsored listing<\/span>/, 'Keep the badge visibly labelled as a sponsored listing');
+const badgeLinks = projectListings.filter(link => /<picture>/.test(link[2]));
+assert.equal(badgeLinks.length, 1, 'Use one picture link for the Chainquiry badge');
+assert.ok(profileBadge.includes(badgeLinks[0][0]), 'Keep the badge link in its profile badge container');
+assert.match(badgeLinks[0][1], /aria-label="View this profile on Chainquiry \(opens in a new tab\)"/);
+const badgePicture = badgeLinks[0][2].match(/^\s*<picture>([\s\S]*?)<\/picture>\s*$/)?.[1];
+assert.ok(badgePicture, 'Keep the badge image and reduced-motion source together in a picture');
+const badgeSources = [...badgePicture.matchAll(/<source\b[^>]*>/g)];
+const badgeImages = [...badgePicture.matchAll(/<img\b[^>]*>/g)];
+assert.equal(badgeSources.length, 1, 'Provide one still badge source for reduced motion');
+assert.equal(badgeImages.length, 1, 'Provide one Chainquiry badge image');
+assert.match(badgeSources[0][0], /media="\(prefers-reduced-motion: reduce\)"/);
+for (const [tag, attribute, motion] of [
+  [badgeSources[0][0], 'srcset', 'still'],
+  [badgeImages[0][0], 'src', 'subtle'],
+]) {
+  const badgeUrl = tag.match(new RegExp(`\\b${attribute}="([^"]+)"`))?.[1];
+  assert.ok(badgeUrl, `Provide the badge ${attribute}`);
+  assert.equal(
+    badgeUrl.replaceAll('&amp;', '&'),
+    `https://chainquiry.com/?cqbh_badge=1&v=1.2.1-378482bb&theme=dark&size=standard&motion=${motion}`,
+    `Use the supplied Chainquiry image URL with ${motion} motion`,
+  );
+}
+assert.match(badgeImages[0][0], /decoding="async"/);
+assert.match(badgeImages[0][0], /alt="Listed on Chainquiry"/);
+assert.match(badgeImages[0][0], /width="288"/);
+assert.match(badgeImages[0][0], /height="72"/);
+const mediaProjectListings = projectListings.filter(link => /<h3>ConnectCoin on Chainquiry<\/h3>/.test(link[2]));
+assert.equal(mediaProjectListings.length, 1, 'Retain the Chainquiry Media card');
+assert.match(mediaProjectListings[0][2], /new tab/, 'Announce that the Chainquiry Media card opens in a new tab');
 
 assert.doesNotMatch(html, /countdown|cq_countdown_embed/i, 'Do not restore the removed countdown or its embed URL');
 assert.doesNotMatch(html, /<(?:iframe|embed|object)\b/i, 'The homepage must not load third-party embedded content');
 assert.doesNotMatch(css, /\.countdown\b/i, 'Remove unused countdown styles');
-assert.match(html, /<section class="hero"[^>]*>(?:(?!<\/section>)[\s\S])*<\/section>\s*<section class="resources"/, 'Keep resources directly after the hero without an empty countdown container');
+assert.match(html, /<section class="hero"[^>]*>(?:(?!<\/section>)[\s\S])*<\/section>\s*<div class="profile-badge">(?:(?!<\/div>)[\s\S])*<\/div>\s*<section class="resources"/, 'Place the Chainquiry profile badge between the hero and resources');
 
 const mediaSection = html.match(/<section class="media" id="media" aria-labelledby="media-title">([\s\S]*?)<\/section>/)?.[1];
 assert.ok(mediaSection, 'Media links need a labelled section with a stable anchor');
@@ -234,4 +268,4 @@ for (const script of ['serve.mjs', 'check.mjs']) {
   execFileSync(process.execPath, ['--check', resolve(root, 'scripts', script)], { stdio: 'pipe' });
 }
 console.log(`OK: page metadata, local assets, link targets, accessibility hooks, script syntax, PDF integrity (${pdf.length} bytes).`);
-console.log(`Public directory: ${(publicBytes / 1024).toFixed(1)} KiB. Static homepage without scripts, runtime dependencies, or third-party embeds.`);
+console.log(`Public directory: ${(publicBytes / 1024).toFixed(1)} KiB. Static homepage with an external Chainquiry badge image; no scripts, iframes, or runtime dependencies.`);
